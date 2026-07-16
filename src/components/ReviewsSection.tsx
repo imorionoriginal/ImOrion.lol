@@ -37,8 +37,8 @@ const REVIEWS: Review[] = [
   {
     id: "itsbigtr",
     author: "– itsBigTR",
-    text: `"The system you set up is very organized and understandable, it made working on the project much easier. You did a short but effective job, Drow."`,
-    textTr: `"Kurduğun sistem çok düzenli ve anlaşılır, projede çalışmayı çok daha kolaylaştırdı. Kısa ama etkili bir iş çıkardın, Drow."`,
+    text: `"The system you set up is very organized and understandable, it made working on the project much easier. You did a short but effective job, Orion."`,
+    textTr: `"Kurduğun sistem çok düzenli ve anlaşılır, projede çalışmayı çok daha kolaylaştırdı. Kısa ama etkili bir iş çıkardın, Orion."`,
     rating: 4.5,
     avatar: bigtrImg,
   },
