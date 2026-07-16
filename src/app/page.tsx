@@ -6,6 +6,7 @@ import Image from "next/image";
 import orionLogo from "@/assets/Orion Logo.png";
 import robloxLogo from "@/assets/Roblox.jpg";
 import discordLogo from "@/assets/discord.png";
+import codingImage from "@/assets/Coding.png";
 import MusicPlayer from "@/components/MusicPlayer";
 import PortfolioSection from "@/components/PortfolioSection";
 import ReviewsSection from "@/components/ReviewsSection";
@@ -226,12 +227,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                className="mt-12 flex h-[350px] w-full items-center justify-center rounded-3xl border border-white/5 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm"
+                className="mt-12 relative flex h-[350px] w-full items-center justify-center rounded-3xl border border-white/5 bg-gradient-to-br from-white/5 to-transparent backdrop-blur-sm overflow-hidden"
               >
-                <div className="flex flex-col items-center gap-4 opacity-50">
-                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M10 13l-2 2 2 2"/><path d="M14 17l2-2-2-2"/></svg>
-                  <span className="font-['Space_Grotesk'] text-sm tracking-widest">[ Graphic Placeholder ]</span>
-                </div>
+                <Image 
+                  src={codingImage} 
+                  alt="Coding" 
+                  fill 
+                  className="object-cover opacity-80 mix-blend-lighten"
+                />
               </motion.div>
             </motion.div>
           </div>

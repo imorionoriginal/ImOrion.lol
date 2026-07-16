@@ -26,6 +26,8 @@ type Project = {
   description: string;
   year: string;
   images: StaticImageData[];
+  link?: string;
+  video?: string;
 };
 
 const CATEGORIES = ["Roblox Games", "Edits", "VFX Work", "Bot Projects"];
@@ -39,6 +41,7 @@ const PROJECTS: Project[] = [
     description: "A parkour game with some cool movement mechanics and stuff, we are making our own maps, scripts, mechanics, lightnings and way more thing this is gonna be peak game is private for now.",
     year: "2026",
     images: [Momentum1, Momentum2, Momentum3],
+    link: "https://discord.gg/tpuxU4b8pV",
   },
   {
     id: "parkour-redone",
@@ -48,6 +51,7 @@ const PROJECTS: Project[] = [
     description: "A Parkour Reborn modded game made by Fynndo, New self made districts, self made announcement system, self made movement fix and way more thing. This game is private bc of being game copy but we are just making it for fun.",
     year: "2025",
     images: [Redone1, Redone2, Redone3],
+    link: "https://discord.gg/YzkKtBaDQ4",
   },
   {
     id: "vfx-showcase",
@@ -57,6 +61,7 @@ const PROJECTS: Project[] = [
     description: "Some VFX I made for fun. ill make more soon.",
     year: "2025",
     images: [VFX1, VFX2, VFX3],
+    link: "https://discord.gg/b9VK6UTD69",
   },
   {
     id: "discord-bot",
@@ -66,15 +71,18 @@ const PROJECTS: Project[] = [
     description: "A discord bot for get server backups and restore servers its storing data inside of you pc so its 100% safe and its allows you to copy one server and paste into any server its copies roles, perms, channels.\n[Paid contact with me for buy it.]",
     year: "2025",
     images: [backup1, backup2, backup3],
+    link: "https://discord.gg/b9VK6UTD69",
   },
   {
     id: "mc-pvp",
     category: "Edits",
-    title: "[MC PVP Edit] - The Beginning",
+    title: "Redliner Edit | SONG: CRYST4L",
     role: "Editor",
-    description: "The First Edit I Made, I Tried My Best So I Hope You Like It. :)",
+    description: "just a edit i really enjoyed making.",
     year: "2026",
-    images: [TheBeginningThumbnail],
+    images: [],
+    video: "/videos/Redliner Edit_02.mp4",
+    link: "https://www.tiktok.com/@imorionoriginal/video/7653832665166105872",
   }
 ];
 
@@ -197,46 +205,63 @@ export default function PortfolioSection() {
                         <span className="font-['Space_Grotesk'] text-sm font-bold text-gray-500">
                           {currentProject.year}
                         </span>
-                        <motion.button
-                          whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-                          whileTap={{ scale: 0.95 }}
-                          className="flex items-center gap-2 rounded-full border border-white/20 px-6 py-2 font-['Space_Grotesk'] text-sm font-medium transition-colors hover:border-white/40"
-                        >
-                          View Detail
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </motion.button>
+                        {currentProject.link && (
+                          <a href={currentProject.link} target="_blank" rel="noopener noreferrer">
+                            <motion.button
+                              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+                              whileTap={{ scale: 0.95 }}
+                              className="flex items-center gap-2 rounded-full border border-white/20 px-6 py-2 font-['Space_Grotesk'] text-sm font-medium transition-colors hover:border-white/40"
+                            >
+                              View Detail
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </motion.button>
+                          </a>
+                        )}
                       </div>
                     </div>
 
-                    {/* Project Images */}
+                    {/* Project Images or Video */}
                     <div className="w-full bg-black/20 p-6 lg:w-7/12 lg:p-8">
-                      <div className={`grid h-full w-full gap-4 ${
-                        currentProject.images.length === 1 ? 'grid-cols-1' : 
-                        currentProject.images.length === 2 ? 'grid-cols-2' : 
-                        'grid-cols-2 grid-rows-2'
-                      }`}>
-                        {currentProject.images.map((img, idx) => {
-                          const isLarge = currentProject.images.length === 3 && idx === 0;
-                          return (
-                            <motion.div
-                              key={idx}
-                              onClick={() => setSelectedImage(img)}
-                              whileHover={{ scale: 1.02 }}
-                              className={`group relative overflow-hidden rounded-xl bg-white/5 cursor-pointer ${
-                                isLarge ? 'col-span-2 row-span-1 min-h-[200px] lg:min-h-0' : 'col-span-1 row-span-1 min-h-[200px] lg:min-h-0'
-                              }`}
-                            >
-                              <Image 
-                                src={img} 
-                                alt={`${currentProject.title} screenshot ${idx + 1}`}
-                                fill
-                                placeholder="blur"
-                                className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100"
-                              />
-                            </motion.div>
-                          );
-                        })}
-                      </div>
+                      {currentProject.video ? (
+                        <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/50 overflow-hidden">
+                          <video 
+                            src={currentProject.video} 
+                            controls 
+                            autoPlay 
+                            loop 
+                            muted 
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                      ) : (
+                        <div className={`grid h-full w-full gap-4 ${
+                          currentProject.images.length === 1 ? 'grid-cols-1' : 
+                          currentProject.images.length === 2 ? 'grid-cols-2' : 
+                          'grid-cols-2 grid-rows-2'
+                        }`}>
+                          {currentProject.images.map((img, idx) => {
+                            const isLarge = currentProject.images.length === 3 && idx === 0;
+                            return (
+                              <motion.div
+                                key={idx}
+                                onClick={() => setSelectedImage(img)}
+                                whileHover={{ scale: 1.02 }}
+                                className={`group relative overflow-hidden rounded-xl bg-white/5 cursor-pointer ${
+                                  isLarge ? 'col-span-2 row-span-1 min-h-[200px] lg:min-h-0' : 'col-span-1 row-span-1 min-h-[200px] lg:min-h-0'
+                                }`}
+                              >
+                                <Image 
+                                  src={img} 
+                                  alt={`${currentProject.title} screenshot ${idx + 1}`}
+                                  fill
+                                  placeholder="blur"
+                                  className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100"
+                                />
+                              </motion.div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                     
                   </div>
