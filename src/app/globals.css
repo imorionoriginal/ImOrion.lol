@@ -1,19 +1,299 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --bg: #000000;
+  --panel: #0b0b0b;
+  --panel-2: #141414;
+  --line: #1d1d1d;
+  --line-strong: #2e2e2e;
+  --fg: #f2f2f2;
+  --fg-2: #a6a6a6;
+  --fg-3: #7d7d7d;
+  --betelgeuse: #ffb27a;
+  --rigel: #b9d2ff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-fg-3: var(--fg-3);
+  --color-star: var(--betelgeuse);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    background: var(--bg);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    scrollbar-color: var(--line-strong) transparent;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 1.5px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Range inputs (player seek and volume) */
+.slider {
+  --p: 0%;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 14px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--fg) var(--p), var(--line-strong) var(--p));
+}
+
+.slider::-moz-range-track {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--fg) var(--p), var(--line-strong) var(--p));
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.slider:hover::-webkit-slider-thumb,
+.slider:focus-visible::-webkit-slider-thumb,
+.slider:hover::-moz-range-thumb,
+.slider:focus-visible::-moz-range-thumb {
+  opacity: 1;
+}
+
+/* Landing tiles */
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--fg);
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.tile-link:hover .tile,
+.tile-link:focus-visible .tile {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.tile-link:hover .tile-label,
+.tile-link:focus-visible .tile-label {
+  color: var(--fg);
+}
+
+@media (max-width: 479px) {
+  .tile {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+/* Constellation: each tile lights up the part of the figure it belongs to */
+.sky-line {
+  stroke: #ffffff;
+  stroke-opacity: 0.13;
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.2s both;
+  transition: stroke-opacity 0.25s;
+}
+
+.hero:has(.tile-link[data-tile="0"]:hover) .sky-line[data-line="0"],
+.hero:has(.tile-link[data-tile="1"]:hover) .sky-line[data-line="1"],
+.hero:has(.tile-link[data-tile="2"]:hover) .sky-line[data-line="2"],
+.hero:has(.tile-link[data-tile="0"]:focus-visible) .sky-line[data-line="0"],
+.hero:has(.tile-link[data-tile="1"]:focus-visible) .sky-line[data-line="1"],
+.hero:has(.tile-link[data-tile="2"]:focus-visible) .sky-line[data-line="2"] {
+  stroke-opacity: 0.5;
+}
+
+.sky-twinkle {
+  animation: twinkle 5s ease-in-out infinite;
+}
+
+.sky-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  fill: var(--fg-3);
+}
+
+@media (max-width: 767px) {
+  .sky-label {
+    display: none;
+  }
+}
+
+/* Equalizer shown next to the playing track */
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.eq i {
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: currentColor;
+  transform-origin: bottom;
+  transform: scaleY(0.3);
+}
+
+.eq[data-playing="true"] i {
+  animation: eq 0.9s ease-in-out infinite;
+}
+
+.eq i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.eq i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Entrances */
+.rise {
+  animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fade {
+  animation: fade 0.7s ease both;
+}
+
+.page-in {
+  animation: rise 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
