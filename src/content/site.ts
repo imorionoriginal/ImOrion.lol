@@ -9,6 +9,7 @@ import {
   UserRound,
   type LucideIcon,
 } from "lucide-react";
+import building from "./building.json";
 
 export const SITE = {
   name: "ImOrion",
@@ -79,3 +80,6 @@ export const LINKS: SocialLink[] = [
 ];
 
 export const DISCORD_USERNAME = "imorionoriginal";
+
+// building.json is written by the /admin panel. Keep these fields in sync with public/admin/config.yml.
+export const BUILDING = building as { name: string; note?: string }[];

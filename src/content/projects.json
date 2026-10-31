@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Momentum",
+    "type": "Roblox game",
+    "role": "Scripter",
+    "year": "2026",
+    "summary": "A parkour game with some cool movement mechanics.",
+    "about": "We're making our own maps, scripts, mechanics, lighting and a lot more. This is gonna be peak.",
+    "images": [
+      "/media/projects/Momentum3.png",
+      "/media/projects/Momentum1.png",
+      "/media/projects/Momentum2.png"
+    ],
+    "status": "Private for now",
+    "linkLabel": "Discord server",
+    "linkUrl": "https://discord.gg/tpuxU4b8pV"
+  },
+  {
+    "title": "Parkour Redone",
+    "type": "Roblox game",
+    "role": "Main Scripter",
+    "year": "2025",
+    "summary": "A modded Parkour Reborn made by Fynndo.",
+    "about": "New self-made districts, a self-made announcement system, a self-made movement fix and a lot more.\n\nIt's private because it's a copy of the game. We're just making it for fun.",
+    "images": [
+      "/media/projects/Redone1.png",
+      "/media/projects/Redone2.png",
+      "/media/projects/Redone3.png"
+    ],
+    "status": "Private",
+    "linkLabel": "Discord server",
+    "linkUrl": "https://discord.gg/YzkKtBaDQ4"
+  },
+  {
+    "title": "VFX Showcase",
+    "type": "VFX",
+    "role": "VFX Artist",
+    "year": "2025",
+    "summary": "Some VFX I made for fun.",
+    "about": "I'll make more soon.",
+    "images": [
+      "/media/projects/VFX1.png",
+      "/media/projects/VFX2.png",
+      "/media/projects/VFX3.png"
+    ],
+    "linkLabel": "Discord server",
+    "linkUrl": "https://discord.gg/b9VK6UTD69"
+  },
+  {
+    "title": "Discord Backup Bot",
+    "type": "Discord bot",
+    "role": "Developer",
+    "year": "2025",
+    "summary": "A Discord bot that backs up and restores servers.",
+    "about": "Copy one server and paste it into any other: roles, perms, channels.\n\nBackups are stored on your own PC, so your data stays with you.",
+    "images": [
+      "/media/projects/backup1.png",
+      "/media/projects/backup2.png",
+      "/media/projects/backup3.png"
+    ],
+    "status": "Paid, contact me to buy it",
+    "linkLabel": "Discord server",
+    "linkUrl": "https://discord.gg/b9VK6UTD69"
+  },
+  {
+    "title": "Redliner Edit",
+    "type": "Video edit",
+    "role": "Editor",
+    "year": "2026",
+    "summary": "Just an edit I really enjoyed making.",
+    "videoFile": "/videos/Redliner Edit_02.mp4",
+    "poster": "/media/projects/RedlinerPoster.jpg",
+    "song": "CRYST4L",
+    "linkLabel": "TikTok",
+    "linkUrl": "https://www.tiktok.com/@imorionoriginal/video/7653832665166105872"
+  }
+]

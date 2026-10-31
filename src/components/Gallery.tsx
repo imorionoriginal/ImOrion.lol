@@ -1,13 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const dialogButtonClass =
   "flex size-10 items-center justify-center rounded-lg text-fg-2 transition-colors hover:bg-white/10 hover:text-fg";
 
-export default function Gallery({ images, title }: { images: StaticImageData[]; title: string }) {
+// next/image needs numbers here, but size-auto lets each file render at its real size.
+const INTRINSIC = { width: 1600, height: 900 };
+
+export default function Gallery({ images, title }: { images: string[]; title: string }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState<number | null>(null);
 
@@ -32,7 +35,7 @@ export default function Gallery({ images, title }: { images: StaticImageData[]; 
       <div className="grid gap-2 sm:grid-cols-2">
         {images.map((image, index) => (
           <button
-            key={image.src}
+            key={image}
             type="button"
             onClick={() => setActive(index)}
             aria-label={`Open ${title} screenshot ${index + 1}`}
@@ -43,7 +46,7 @@ export default function Gallery({ images, title }: { images: StaticImageData[]; 
             <Image
               src={image}
               alt=""
-              sizes="(max-width: 1024px) 100vw, 680px"
+              {...INTRINSIC}
               className="size-auto max-h-full max-w-full rounded-[5px] object-contain"
             />
           </button>
@@ -73,6 +76,7 @@ export default function Gallery({ images, title }: { images: StaticImageData[]; 
             <Image
               src={images[active]}
               alt={`${title} screenshot ${active + 1}`}
+              {...INTRINSIC}
               className="size-auto max-h-full max-w-full rounded-lg object-contain"
             />
           )}

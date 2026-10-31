@@ -1,0 +1,138 @@
+# Settings for the panel at imorion.lol/admin (Sveltia CMS).
+# Field names here must match the types in src/content/*.ts.
+
+backend:
+  name: github
+  repo: imorionoriginal/ImOrion.lol
+  branch: main
+
+site_url: https://imorion.lol
+
+logo:
+  src: /admin/logo.svg
+
+# Keeps uploaded file names plain, so "Görsel.png" becomes "gorsel.webp".
+slug:
+  encoding: ascii
+  clean_accents: true
+
+media_folder: /public/media
+public_folder: /media
+
+output:
+  omit_empty_optional_fields: true
+
+media_libraries:
+  default:
+    config:
+      # GitHub refuses files over 100 MB.
+      max_file_size: 95000000
+      slugify_filename: true
+      # GIFs are left alone so animated avatars keep moving.
+      transformations:
+        png: { format: webp, quality: 85, width: 2048, height: 2048 }
+        jpeg: { format: webp, quality: 85, width: 2048, height: 2048 }
+
+collections:
+  - name: projects
+    label: Projeler
+    label_singular: Proje
+    file: /src/content/projects.json
+    identifier_field: title
+    fields:
+      - { name: title, label: Başlık, hint: "Sayfa adresi bundan oluşur." }
+      - { name: type, label: Tür, hint: "Örnek: Roblox game, Discord bot, Video edit" }
+      - { name: role, label: Rolüm, hint: "Örnek: Scripter, Developer, Editor" }
+      - { name: year, label: Yıl }
+      - { name: summary, label: Kısa açıklama, hint: "Listede ve sayfanın başında görünen tek cümle." }
+      - name: about
+        label: Detaylı açıklama
+        widget: text
+        required: false
+        hint: "Paragrafları boş bir satırla ayır."
+      - name: images
+        label: Ekran görüntüleri
+        widget: image
+        multiple: true
+        required: false
+        media_folder: /public/media/projects
+        public_folder: /media/projects
+        hint: "İlk görsel en büyük görünür ve listede kapak olur."
+      - name: videoLink
+        label: Video linki
+        required: false
+        hint: "YouTube veya TikTok linkini yapıştır, video sayfaya otomatik gömülür. En kolay ve önerilen yol bu."
+      - name: videoFile
+        label: Video dosyası
+        widget: file
+        required: false
+        accept: video/*
+        media_folder: /public/videos
+        public_folder: /videos
+        hint: "Sadece link yoksa kullan. En fazla 95 MB, ve sitenin toplam alanı 1 GB."
+      - name: poster
+        label: Video kapağı
+        widget: image
+        required: false
+        media_folder: /public/media/projects
+        public_folder: /media/projects
+        hint: "Listede görünen kapak. YouTube linkinde gerekmez, otomatik gelir. TikTok linki ve video dosyası için ekle."
+      - { name: song, label: Şarkı, required: false }
+      - { name: status, label: Durum, required: false, hint: "Örnek: Private for now, Paid, Released" }
+      - { name: linkLabel, label: Link yazısı, required: false, hint: "Örnek: Discord server, Roblox, TikTok" }
+      - { name: linkUrl, label: Link adresi, required: false }
+
+  - name: building
+    label: Şu an yaptıklarım
+    label_singular: Yapılan iş
+    file: /src/content/building.json
+    identifier_field: name
+    fields:
+      - { name: name, label: Ad, hint: "Örnek: Noxed" }
+      - { name: note, label: Kısa not, required: false, hint: "Örnek: upcoming window manager app" }
+
+  - name: reviews
+    label: Yorumlar
+    label_singular: Yorum
+    file: /src/content/reviews.json
+    identifier_field: name
+    fields:
+      - { name: name, label: Ad }
+      - { name: role, label: Unvan, required: false, hint: "Örnek: Creator of Momentum" }
+      - { name: text, label: Yorum (İngilizce), widget: text }
+      - { name: textTr, label: Yorum (Türkçe), widget: text, required: false }
+      - { name: rating, label: Puan, widget: number, value_type: float, min: 0, max: 5, step: 0.5 }
+      - name: avatar
+        label: Profil resmi
+        widget: image
+        required: false
+        media_folder: /public/media/avatars
+        public_folder: /media/avatars
+
+  - name: tracks
+    label: Müzikler
+    label_singular: Müzik
+    file: /src/content/tracks.json
+    identifier_field: title
+    fields:
+      - { name: title, label: Şarkı adı }
+      - name: src
+        label: Müzik dosyası
+        widget: file
+        accept: audio/*
+        media_folder: /public/music
+        public_folder: /music
+      - name: cover
+        label: Kapak
+        widget: image
+        media_folder: /public/music/covers
+        public_folder: /music/covers
+      - name: volumeMultiplier
+        label: Ses çarpanı
+        widget: number
+        value_type: float
+        required: false
+        min: 0.1
+        max: 3
+        step: 0.1
+        hint: "Şarkı diğerlerinden kısık geliyorsa 2 yap. Boş bırakılabilir."

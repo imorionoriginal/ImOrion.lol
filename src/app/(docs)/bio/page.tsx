@@ -8,13 +8,14 @@ import {
   Gamepad2,
   Globe,
   MessageCircle,
-  Rocket,
   Sparkles,
 } from "lucide-react";
 import AnkaraClock from "@/components/AnkaraClock";
 import CopyButton from "@/components/CopyButton";
+import Building from "@/components/docs/Building";
 import DocPage from "@/components/docs/DocPage";
-import { Callout, Chip, Chips, H2, P, Prop, Props, Strong } from "@/components/docs/ui";
+import { Chip, Chips, H2, P, Prop, Props, Strong } from "@/components/docs/ui";
+import { PROJECTS } from "@/content/projects";
 import { DISCORD_USERNAME, LINKS, SITE } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -34,13 +35,17 @@ const TOC = [
 const MAIN_LANGUAGES = ["Luau", "Rust"];
 const OTHER_LANGUAGES = ["C++", "Java", "Assembly (NASM)", "C#", "Python", "JavaScript", "PHP", "HTML/CSS"];
 
+// Falls back to the project list if a project gets renamed or removed in the panel.
+const projectLink = (slug: string) =>
+  PROJECTS.some((project) => project.slug === slug) ? `/projects/${slug}` : "/projects";
+
 const WORK = [
-  { icon: Gamepad2, title: "Games", text: "Mostly Roblox, written in Luau.", href: "/projects/momentum" },
+  { icon: Gamepad2, title: "Games", text: "Mostly Roblox, written in Luau.", href: projectLink("momentum") },
   { icon: Globe, title: "Websites", text: "You're looking at one." },
-  { icon: Bot, title: "Bots", text: "Discord bots, mostly.", href: "/projects/discord-backup-bot" },
+  { icon: Bot, title: "Bots", text: "Discord bots, mostly.", href: projectLink("discord-backup-bot") },
   { icon: AppWindow, title: "Apps", text: "Tools I end up wanting for myself." },
-  { icon: Clapperboard, title: "Video edits", text: "The ones I enjoy making.", href: "/projects/redliner-edit" },
-  { icon: Sparkles, title: "VFX design", text: "For fun, more coming soon.", href: "/projects/vfx-showcase" },
+  { icon: Clapperboard, title: "Video edits", text: "The ones I enjoy making.", href: projectLink("redliner-edit") },
+  { icon: Sparkles, title: "VFX design", text: "For fun, more coming soon.", href: projectLink("vfx-showcase") },
 ];
 
 const APPS = [
@@ -69,10 +74,7 @@ export default function BioPage() {
           actually work. I enjoy creating. In other words, I do it for fun.
         </P>
         <P>No fancy corporate buzzwords...</P>
-        <Callout icon={Rocket} title="Right now">
-          Developing <Strong>Noxed</Strong>, my upcoming window manager app, and the game{" "}
-          <Strong>Flex Your Limiteds</Strong>.
-        </Callout>
+        <Building title="Right now" />
       </section>
 
       <H2 id="facts">Quick facts</H2>

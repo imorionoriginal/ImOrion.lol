@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Rocket } from "lucide-react";
+import { ArrowRight, Clapperboard } from "lucide-react";
+import Building from "@/components/docs/Building";
 import DocPage from "@/components/docs/DocPage";
-import { Callout, Strong } from "@/components/docs/ui";
 import { PROJECTS } from "@/content/projects";
 
 export const metadata: Metadata = {
@@ -19,10 +19,7 @@ export default function ProjectsPage() {
       title="Projects"
       lede="Things I've built or helped build, mostly because they seemed fun to make."
     >
-      <Callout icon={Rocket} title="In the works">
-        <Strong>Noxed</Strong>, an upcoming window manager app, and <Strong>Flex Your Limiteds</Strong>, a
-        game. They&apos;ll show up here when they&apos;re ready.
-      </Callout>
+      <Building title="In the works" />
 
       <ul className="divide-y divide-line border-y border-line">
         {PROJECTS.map((project) => (
@@ -31,14 +28,12 @@ export default function ProjectsPage() {
               href={`/projects/${project.slug}`}
               className="group -mx-3 flex items-center gap-4 rounded-lg px-3 py-3 transition-colors hover:bg-panel"
             >
-              <span className="relative aspect-[8/5] w-[92px] shrink-0 overflow-hidden rounded-md border border-line bg-panel-2 sm:w-[112px]">
-                <Image
-                  src={project.poster ?? project.images[0]}
-                  alt=""
-                  fill
-                  sizes="112px"
-                  className="object-cover"
-                />
+              <span className="relative flex aspect-[8/5] w-[92px] shrink-0 items-center justify-center overflow-hidden rounded-md border border-line bg-panel-2 sm:w-[112px]">
+                {project.thumbnail ? (
+                  <Image src={project.thumbnail} alt="" fill sizes="112px" className="object-cover" />
+                ) : (
+                  <Clapperboard size={18} strokeWidth={1.5} className="text-fg-3" aria-hidden />
+                )}
               </span>
 
               <span className="min-w-0 flex-1">

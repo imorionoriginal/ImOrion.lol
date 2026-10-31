@@ -39,7 +39,7 @@ export function Callout({
       <Icon size={16} strokeWidth={1.75} className="mt-[3px] shrink-0 text-star" aria-hidden />
       <div className="min-w-0 text-[14px] leading-relaxed text-fg-2">
         <p className="font-medium text-fg">{title}</p>
-        <p className="mt-0.5">{children}</p>
+        <div className="mt-0.5">{children}</div>
       </div>
     </aside>
   );

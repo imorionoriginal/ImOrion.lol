@@ -40,13 +40,19 @@ export default function ReviewList() {
         {REVIEWS.map((review) => (
           <section key={review.id} id={review.id} className="border-t border-line py-7">
             <div className="flex items-center gap-3">
-              <Image
-                src={review.avatar}
-                alt=""
-                width={40}
-                height={40}
-                className="size-10 shrink-0 rounded-lg object-cover"
-              />
+              {review.avatar ? (
+                <Image
+                  src={review.avatar}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="size-10 shrink-0 rounded-lg object-cover"
+                />
+              ) : (
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-panel-2 text-[15px] text-fg-2">
+                  {review.name.charAt(0)}
+                </span>
+              )}
               <div className="min-w-0 flex-1">
                 <h2 className="text-[15px] font-medium leading-tight">{review.name}</h2>
                 {review.role && <p className="mt-1 text-[13px] leading-tight text-fg-3">{review.role}</p>}
@@ -61,7 +67,7 @@ export default function ReviewList() {
             </div>
 
             <blockquote lang={language} className="mt-4 text-[17px] leading-relaxed tracking-[-0.005em]">
-              “{language === "tr" ? review.textTr : review.text}”
+              “{language === "tr" && review.textTr ? review.textTr : review.text}”
             </blockquote>
           </section>
         ))}

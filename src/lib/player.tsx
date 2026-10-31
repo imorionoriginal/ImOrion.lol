@@ -182,7 +182,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: track.title,
       artist: "imorion.lol",
-      artwork: [{ src: track.cover.src }],
+      artwork: [{ src: track.cover }],
     });
     navigator.mediaSession.setActionHandler("nexttrack", next);
     navigator.mediaSession.setActionHandler("previoustrack", prev);

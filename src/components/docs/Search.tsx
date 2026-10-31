@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { PROJECTS } from "@/content/projects";
 import { REVIEWS } from "@/content/reviews";
-import { LINKS, NAV } from "@/content/site";
+import { BUILDING, LINKS, NAV } from "@/content/site";
 
 type Item = {
   label: string;
@@ -29,7 +29,7 @@ const ITEMS: Item[] = [
     group: "Bio",
     href: "/bio#who",
     icon: Hash,
-    keywords: "about self-taught noxed flex your limiteds",
+    keywords: `about self-taught ${BUILDING.map((item) => item.name).join(" ")}`,
   },
   { label: "Quick facts", group: "Bio", href: "/bio#facts", icon: Hash, keywords: "location ankara turkiye timezone utc" },
   {

@@ -1,0 +1,23 @@
+[
+  {
+    "title": "From The Islands",
+    "src": "/music/From The Islands.mp3",
+    "cover": "/music/covers/From The Islands.jpg"
+  },
+  {
+    "title": "GATA ONLY REMIX",
+    "src": "/music/GATA ONLY REMIX.mp3",
+    "cover": "/music/covers/GATA ONLY.jpg"
+  },
+  {
+    "title": "anybody can find love (except you.)",
+    "src": "/music/anybody can find love (except you.).mp3",
+    "cover": "/music/covers/anybody can find love.jpg"
+  },
+  {
+    "title": "Beethoven Virus INSANE PIANO VERSION",
+    "src": "/music/Beethoven Virus INSANE PIANO VERSION - Pianoly Official (192k).mp3",
+    "cover": "/music/covers/BeethovenVirus.png",
+    "volumeMultiplier": 2
+  }
+]
