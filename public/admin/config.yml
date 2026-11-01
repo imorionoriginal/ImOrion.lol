@@ -25,8 +25,9 @@ output:
 media_libraries:
   default:
     config:
-      # GitHub refuses files over 100 MB.
-      max_file_size: 95000000
+      # The panel sends each file as one request, and GitHub drops requests that take more than
+      # about 10 seconds to upload. Past this size a save fails with a CORS-looking network error.
+      max_file_size: 10000000
       slugify_filename: true
       # GIFs are left alone so animated avatars keep moving.
       transformations:
@@ -69,7 +70,7 @@ collections:
         accept: video/*
         media_folder: /public/videos
         public_folder: /videos
-        hint: "Sadece link yoksa kullan. En fazla 95 MB, ve sitenin toplam alanı 1 GB."
+        hint: "En fazla 10 MB. Daha büyük videoyu YouTube'a yükle (liste dışı da olur) ve linkini üstteki alana yapıştır."
       - name: poster
         label: Video kapağı
         widget: image
