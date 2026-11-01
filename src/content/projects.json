@@ -85,5 +85,18 @@
     "status": "Released",
     "linkLabel": "Kontra Discord Server",
     "linkUrl": "https://discord.gg/3NCAvgN6t"
+  },
+  {
+    "title": "The Infinite Table",
+    "type": "Pc App",
+    "role": "Developer",
+    "year": "2026",
+    "summary": "my first public own project is \"The Infinite Table\" this app allows you to easily draw/plan everything easily.",
+    "images": [
+      "/media/projects/image.webp"
+    ],
+    "status": "Released",
+    "linkLabel": "Repo:",
+    "linkUrl": "https://github.com/imorionoriginal/The-Infinite-Board"
   }
 ]
